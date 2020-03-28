@@ -10,6 +10,10 @@
 
 #define MELODY_FIXED 0
 #define MELODY_SINGLE 1
+#define MELODY_ARP 2
+#define MELODY_PAD 3
+
+#define MELODY_COUNT 4
 
 class Generator {
 protected:
@@ -23,6 +27,7 @@ public:
     virtual Chord* getChordForStep( uint16_t step, Progression* progression); 
     uint8_t getType() { return _type; }
     uint8_t getMelody() { return _melody; }
+    virtual void reset() {}
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef _SCREENPATTERNSINGLE_H
 #define _SCREENPATTERNSINGLE_H
 
-#include "ui/uiscreen.h"
+#include "ui/uievent.h"
 #include "screens/screenpatterneuclidean.h"
 
 class ScreenPatternSingle : public ScreenPatternEuclidean {

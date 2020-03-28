@@ -92,6 +92,9 @@ bool Ndlr::onClock() {
         // reset sync in case we are here because of isActive
         _syncInterval = 0;
         _syncCount = 0;
+        if( _patternIndex[i] > -1 && _generators[_patternIndex[i]] != 0) {
+          _generators[_patternIndex[i]]->reset();
+        }
         didSomething = true;
       }
       // Mute

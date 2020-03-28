@@ -3,39 +3,25 @@
 
 #include "ndlr/note.h"
 
+#define MAX_CHORD_SIZE 32
 
 class Chord {
     uint8_t _length;
-    Note** _notes;
-public:
-    Chord( Note* note) {
-        _length = 1;
-        _notes = new Note*[1];
-        _notes[0] = note;
-    }
-    Chord( uint8_t length) {
-        _notes = new Note*[length];
-        _length = length;
-        for( uint8_t i = 0; i < length; ++i) {
-            _notes[i] = 0;
-        }
-    }
-    void setNote( uint8_t idx, Note* note) {
-        if( idx >= _length) {
-            return;
-        }
-        _notes[idx] = note;
-    }
-    uint8_t getLength() {
-        return _length;
-    }
-    Note* getNote( uint8_t idx) {
-        if( idx >= _length) {
-            return 0;
-        }
-        return _notes[idx];
-    }
 
+    uint8_t _noteValue[MAX_CHORD_SIZE];
+    uint8_t _noteVelocity[MAX_CHORD_SIZE];
+    uint8_t _noteLength[MAX_CHORD_SIZE];
+    bool _noteLegato[MAX_CHORD_SIZE];
+public:
+    Chord( uint8_t value, uint8_t velocity, uint8_t length, bool legato);
+    Chord( Note* note);
+    Chord( uint8_t length);
+    void setNote( uint8_t idx, uint8_t value, uint8_t velocity, uint8_t length, bool legato);
+    void setNote( uint8_t idx, Note* note);
+    uint8_t getLength();
+    Note* getNote( uint8_t idx);
+    void rescale( uint8_t size);
+    void normalize( uint8_t base);
 };
 
 #endif

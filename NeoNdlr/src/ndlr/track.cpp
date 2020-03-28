@@ -91,7 +91,6 @@ void Track::tick( Generator* generator, Progression* progression) {
             this->playNote( note);
             delete note;
         }
-
         delete chord;
     }
 

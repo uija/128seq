@@ -31,9 +31,12 @@ void Progression::nextStep() {
 }
 Chord* Progression::getCurrentChord( int8_t offset, uint8_t velocity, uint8_t length, bool legato) {
     Chord* chord = new Chord( 3);
+    uint8_t base = this->getCurrentNote( 0);
     for( uint8_t i = 0; i < 3; ++i) {
         if( _scale->chords[_index] == 0) {
-            chord->setNote( i, new Note( _root + CHORD_INTERVALS_MINOR.data[i] + offset, velocity, length, legato));
+            chord->setNote( i, new Note( base + CHORD_INTERVALS_MINOR.data[i] + offset, velocity, length, legato));
+        } else {
+            chord->setNote( i, new Note( base + CHORD_INTERVALS_MAJOR.data[i] + offset, velocity, length, legato));
         }
     }
     return chord;

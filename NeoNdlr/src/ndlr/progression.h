@@ -37,8 +37,8 @@ struct ProgressionInterval {
 };
 
 static Scale scales[] = {
-    Scale( "Maj", (uint8_t[]){0,2,4,5,7,9,11,12}, (uint8_t[]){1, 0, 0, 1, 1, 0, 0}),
-    Scale( "Maj", (uint8_t[]){0,2,3,5,7,8,10,12}, (uint8_t[]){0, 1, 1, 0, 0, 1, 0}),
+    Scale( "Min", (uint8_t[]){0,2,4,5,7,9,11,12}, (uint8_t[]){1, 0, 0, 1, 1, 0, 0, 1}),
+    Scale( "Maj", (uint8_t[]){0,2,3,5,7,8,10,12}, (uint8_t[]){0, 1, 1, 0, 0, 1, 0, 0}),
 };
 static ProgressionInterval progressionIntervals[] = {
     ProgressionInterval( "I", 1, (uint8_t[]){0}),

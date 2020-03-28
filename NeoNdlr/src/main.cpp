@@ -6,6 +6,8 @@
 #include "ndlr/ndlr.h"
 #include "ndlr/fixednotegenerator.h"
 #include "ndlr/singlenotegenerator.h"
+#include "ndlr/arpgenerator.h"
+#include "ndlr/padgenerator.h"
 #include "screens/screenmain.h"
 
 LiquidCrystal_I2C lcd( 0x27, 20, 4);
@@ -66,42 +68,67 @@ void setup() {
   // kick
   Track* t = ndlr.getTrack( 0);
   t->setMidiChannel( 1);
-  FixedNoteGenerator* fng = new FixedNoteGenerator( 64);
+  FixedNoteGenerator* fng = new FixedNoteGenerator( 36);
   fng->initialize( 16, 4, 0);
   //fng->initialize( 16, 1, 0);
   ndlr.setGenerator( 0, 0, fng);
 
   // snare
   t = ndlr.getTrack( 1);
-  t->setMidiChannel( 2);
-  fng = new FixedNoteGenerator( 64);
+  t->setMidiChannel( 1);
+  fng = new FixedNoteGenerator( 39);
   fng->initialize( 16, 2, 4);
   //fng->initialize( 16, 1, 0);
   ndlr.setGenerator( 1, 0, fng);
 
   // hihat
   t = ndlr.getTrack( 2);
-  t->setMidiChannel( 3);
-  fng = new FixedNoteGenerator( 64);
+  t->setMidiChannel( 1);
+  fng = new FixedNoteGenerator( 42);
   fng->initialize( 16, 4, 2);
   //fng->initialize( 16, 1, 0);
   ndlr.setGenerator( 2, 0, fng);
 
   // bass
   t = ndlr.getTrack( 3);
-  t->setMidiChannel( 4);
-  SingleNoteGenerator* sng = new SingleNoteGenerator( -1);
+  t->setMidiChannel( 2);
+  SingleNoteGenerator* sng = new SingleNoteGenerator( -3);
   sng->initialize( 16, 7, 0);
   //sng->initialize( 16, 1, 0);
   ndlr.setGenerator( 3, 0, sng);
 
+  // arp
+  t = ndlr.getTrack( 4);
+  t->setMidiChannel( 3);
+  ArpGenerator* ag = new ArpGenerator();
+  ag->initialize( 16, 8, 0);
+  ag->setNormalize( true);
+  ndlr.setGenerator( 4, 0, ag);
+
+   // pad
+  t = ndlr.getTrack( 5);
+  t->setMidiChannel( 4);
+  PadGenerator* pg = new PadGenerator();
+  pg->initialize( 16, 1, 0);
+  pg->setNoteLength( 95);
+  pg->setNormalize( true);
+  ndlr.setGenerator( 5, 0, pg);
+
+   // piano
+  t = ndlr.getTrack( 6);
+  t->setMidiChannel( 5);
+  pg = new PadGenerator();
+  pg->initialize( 16, 5, 0);
+  pg->setNormalize( true);
+  ndlr.setGenerator( 6, 0, pg);
+
   ndlr.getProgressionPatternAt( 0)->setIntervalAt( 0, 0);
   ndlr.getProgressionPatternAt( 0)->setDurationAt( 0, 16);
-  ndlr.getProgressionPatternAt( 0)->setIntervalAt( 1, 5);
+  ndlr.getProgressionPatternAt( 0)->setIntervalAt( 1, 4);
   ndlr.getProgressionPatternAt( 0)->setDurationAt( 1, 16);
-  ndlr.getProgressionPatternAt( 0)->setIntervalAt( 2, 4);
+  ndlr.getProgressionPatternAt( 0)->setIntervalAt( 2, 5);
   ndlr.getProgressionPatternAt( 0)->setDurationAt( 2, 16);
-  ndlr.getProgressionPatternAt( 0)->setIntervalAt( 3, 7);
+  ndlr.getProgressionPatternAt( 0)->setIntervalAt( 3, 3);
   ndlr.getProgressionPatternAt( 0)->setDurationAt( 3, 16);
 
   ui.setScreen( new ScreenMain( &ndlr));
